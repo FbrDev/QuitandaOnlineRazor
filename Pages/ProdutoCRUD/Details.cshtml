@@ -1,0 +1,43 @@
+﻿@page
+@model AspNetCoreWebApp.Pages.ProdutoCRUD.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes de Produto";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4><b>Código:</b> @Model.Produto.IdProduto.ToString("D6")</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produto.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produto.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produto.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produto.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produto.Preco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produto.Preco)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produto.Estoque)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produto.Estoque)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Produto?.IdProduto">Alterar</a> |
+    <a asp-page="./Index">Voltar à Listagem</a>
+</div>
