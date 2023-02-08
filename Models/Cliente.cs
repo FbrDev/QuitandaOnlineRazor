@@ -21,7 +21,7 @@ namespace AspNetCoreWebApp.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]
         [MaxLength(11, ErrorMessage = "O campo {0} deve ter no máximo {1} caracteres.")]
         [RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com {1} dígitos númericos.")]
-        public int CPF { get; set; }
+        public string CPF { get; set; }
 
         [DisplayName("E-mail")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]

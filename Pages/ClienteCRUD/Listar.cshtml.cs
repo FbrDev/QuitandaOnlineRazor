@@ -38,7 +38,7 @@ namespace AspNetCoreWebApp.Pages.ClienteCRUD
                 await _context.SaveChangesAsync();
             }
 
-            return Page();
+            return RedirectToPage("./Listar");
         }
     }
 }

@@ -52,3 +52,7 @@
         <h2>Não há clientes cadastrados!</h2>
     }
 </main>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_CustomConfirm");}
+}
