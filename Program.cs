@@ -3,6 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreWebApp.Data;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.AspNetCore.Builder;
+using System.Collections.Generic;
+using Microsoft.Extensions.Hosting;
+using System;
+using Microsoft.Extensions.Configuration;
 
 namespace AspNetCoreWebApp
 {

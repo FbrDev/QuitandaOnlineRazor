@@ -1,0 +1,54 @@
+﻿@page
+@model AspNetCoreWebApp.Pages.ClienteCRUD.ListarModel
+@{
+    ViewData["titulo"] = "Listagem de Clientes";
+}
+
+<header class="container p-3">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h1>@ViewData["titulo"]</h1>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-end">
+            <a asp-page="Incluir" class="btn btn-info">Novo Cliente</a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    @if (Model.Clientes.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Clientes[0].Nome)</th>
+                    <th>@Html.DisplayNameFor(m => m.Clientes[0].CPF)</th>
+                    <th>@Html.DisplayNameFor(m => m.Clientes[0].DataNascimento)</th>
+                    <th>@Html.DisplayNameFor(m => m.Clientes[0].Email)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Clientes)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CPF)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-page="./Alterar" asp-route-id="@item.IdCliente">Alterar</a>
+                            <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.IdCliente" method="post">
+                                <button class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);" type="button">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>Não há clientes cadastrados!</h2>
+    }
+</main>

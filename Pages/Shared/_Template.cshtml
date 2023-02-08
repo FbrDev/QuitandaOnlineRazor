@@ -1,37 +1,35 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width"/>
-        <title>Quitanda Online :: Área Administrativa</title>
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
-    <body>
-        <header class="bg-dark">
-            <div class="container">
-                <nav class="nav navbar-dark bg-dark navbar-expand-lg">
-                    <a class="navbar-brand" href="#">Quitanda Online</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltmarkup" aria-expanded="false" arial-label="Toggle navigator">
-                        <span class="navbar-toggle-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link" asp-area="" asp-page="/Admin">Área Administrativa</a>
-                            <a class="nav-item nav-link" asp-area="" asp-page="/ProdutoCRUD/Index">Produtos</a>
-                            <a class="nav-item nav-link" asp-area="" asp-page="/ClienteCRUD/Listar">Clientes</a>
-                        </div>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Quitanda Online :: Área Administrativa</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="d-flex flex-column h-100">
+    <header class="bg-dark">
+        <div class="container">
+            <nav class="nav navbar-dark bg-dark navbar-expand-lg">
+                <a class="navbar-brand" href="#">Quitanda Online</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltmarkup" aria-expanded="false" arial-label="Toggle navigator">
+                    <span class="navbar-toggle-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Admin">Área Administrativa</a>
+                        <a class="nav-item nav-link" asp-area="" asp-page="/ProdutoCRUD/Index">Produtos</a>
+                        <a class="nav-item nav-link" asp-area="" asp-page="/ClienteCRUD/Listar">Clientes</a>
                     </div>
-                </nav>
-            </div>
-        </header>
-        <section class="container">
-            <main role="main">
-                @RenderBody()
-            </main>
-        </section>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="container flex-grow-1">
+        @RenderBody()
+    </main>
         <footer class="footer bg-light text-center p-4 fixed-bottom">
-            <div class="container">
-                <span class="text-dark">Copyright &copy; 2023 - Todos os direitos reservados</span>
-            </div>
-        </footer>
-    </body>
+        <div class="container">
+            <span class="text-dark">Copyright &copy; 2023 - Todos os direitos reservados</span>
+        </div>
+    </footer>
+</body>
 </html>
