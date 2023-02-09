@@ -11,12 +11,12 @@ namespace AspNetCoreWebApp.Pages.ClienteCRUD
 {
     public class AlterarModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly QuitandaOnlineContext _context;
 
         [BindProperty]
         public Cliente Cliente { get; set; }
 
-        public AlterarModel(ApplicationDbContext context)
+        public AlterarModel(QuitandaOnlineContext context)
         {
             _context = context;
         }

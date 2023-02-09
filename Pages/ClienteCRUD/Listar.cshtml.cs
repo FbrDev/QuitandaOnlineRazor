@@ -10,9 +10,9 @@ namespace AspNetCoreWebApp.Pages.ClienteCRUD
 {
     public class ListarModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly QuitandaOnlineContext _context;
 
-        public ListarModel(ApplicationDbContext context)
+        public ListarModel(QuitandaOnlineContext context)
         {
             _context = context;
         }

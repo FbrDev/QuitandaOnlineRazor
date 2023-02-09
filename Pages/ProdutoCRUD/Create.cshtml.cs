@@ -12,9 +12,9 @@ namespace AspNetCoreWebApp.Pages.ProdutoCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly AspNetCoreWebApp.Data.ApplicationDbContext _context;
+        private readonly AspNetCoreWebApp.Data.QuitandaOnlineContext _context;
 
-        public CreateModel(AspNetCoreWebApp.Data.ApplicationDbContext context)
+        public CreateModel(AspNetCoreWebApp.Data.QuitandaOnlineContext context)
         {
             _context = context;
         }
@@ -36,7 +36,7 @@ namespace AspNetCoreWebApp.Pages.ProdutoCRUD
                 return Page();
             }
 
-            _context.Produto.Add(Produto);
+            _context.Produtos.Add(Produto);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

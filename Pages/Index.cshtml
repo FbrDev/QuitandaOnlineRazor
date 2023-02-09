@@ -14,9 +14,9 @@
     {
         <div class="col-sm-3">
             <div class="card text-center bg-light mb-4">
-                <img class="card-img-top" src="/img/produto/@String.Concat(produto.IdProduto.ToString("D6"), ".jpg")" alt="Imagem de @produto.Nome">
+                <img class="card-img-top" src="/img/produto/@String.Concat(produto.IdProduto, ".jpg")" alt="Imagem de @produto.Nome">
                 <div class="card-header">
-                    R$ @produto.Preco.ToString("F2")
+                    R$ @produto
                 </div>
                 <div class="card-body" style="height:140px;">
                     <h5 class="card-title">@produto.Nome</h5>

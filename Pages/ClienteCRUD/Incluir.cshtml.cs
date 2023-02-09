@@ -8,12 +8,12 @@ namespace AspNetCoreWebApp.Pages.ClienteCRUD
 {
     public class IncluirModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly QuitandaOnlineContext _context;
 
         [BindProperty]
         public Cliente Cliente { get; set; }
 
-        public IncluirModel(ApplicationDbContext context)
+        public IncluirModel(QuitandaOnlineContext context)
         {
             _context = context;
         }
