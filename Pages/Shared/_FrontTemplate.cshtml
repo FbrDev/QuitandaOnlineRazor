@@ -25,9 +25,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacidade">Política de Privacidade</a>
                         </li>
                     </ul>
-                    <div class="align-self-end">
+                    @*<div class="align-self-end">
                         <partial name="_LoginLinks" />
-                    </div>
+                    </div>*@
                     <div class="align-self-end">
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -44,7 +44,7 @@
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
+        @*<partial name="_CookieConsentPartial" />*@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -57,7 +57,7 @@
                     &copy; 2020 - Quitanda Online - <a asp-area="" asp-page="/Privacidade">Política de Privacidade</a>
                 </div>
                 <div class="col-4 col-sm-4 text-right">
-                    <a asp-area="" asp-page="/Admin/Admin">Administrar</a>
+                    <a asp-area="" asp-page="/Admin">Administrar</a>
                 </div>
             </div>
         </div>
