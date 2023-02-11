@@ -35,14 +35,38 @@ namespace QuitandaOnline.Pages.ClienteCRUD
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if(!ModelState.IsValid) return NotFound();
+            //para garantir que o CPF e o e-mail não serão atualizados
+            var cliente = await _context.Clientes.Select(m => new { m.IdCliente, m.Email, m.CPF }).FirstOrDefaultAsync();
+            Cliente.Email = cliente.Email;
+            Cliente.CPF = cliente.CPF;
+
+            //ModelState.ClearValidationState("Cliente.Email");
+            //ModelState.ClearValidationState("Cliente.CPF");
+
+            if (ModelState.Keys.Contains("Cliente.Email"))
+            {
+                ModelState["Cliente.Email"].Errors.Clear();
+                ModelState.Remove("Cliente.Email");
+            }
+            if (ModelState.Keys.Contains("Cliente.CPF"))
+            {
+                ModelState["Cliente.CPF"].Errors.Clear();
+                ModelState.Remove("Cliente.CPF");
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             _context.Attach(Cliente).State = EntityState.Modified;
+            _context.Attach(Cliente.Endereco).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
-            }catch (DbUpdateConcurrencyException)
+            }
+            catch (DbUpdateConcurrencyException)
             {
                 if (!ClienteAindaExiste(Cliente.IdCliente))
                 {

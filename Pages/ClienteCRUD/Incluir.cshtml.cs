@@ -29,7 +29,7 @@ namespace QuitandaOnline.Pages.ClienteCRUD
             cliente.Endereco= new Endereco();
             cliente.Situacao = Cliente.SituacaoCliente.Cadastrado;
 
-            if(await TryUpdateModelAsync<Cliente>(cliente))
+            if(await TryUpdateModelAsync(cliente, Cliente.GetType(), nameof(Cliente)))
             {
                 _context.Clientes.Add(cliente);
                 await _context.SaveChangesAsync();
