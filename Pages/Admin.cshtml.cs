@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AspNetCoreWebApp.Pages
+namespace QuitandaOnline.Pages
 {
     public class AdminModel : PageModel
     {

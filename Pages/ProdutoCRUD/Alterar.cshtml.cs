@@ -7,14 +7,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuitandaOnline.Pages.ClienteCRUD
+namespace QuitandaOnline.Pages.ProdutoCRUD
 {
     public class AlterarModel : PageModel
     {
         private readonly QuitandaOnlineContext _context;
 
         [BindProperty]
-        public Cliente Cliente { get; set; }
+        public Produto Produto { get; set; }
 
         public AlterarModel(QuitandaOnlineContext context)
         {
@@ -26,9 +26,9 @@ namespace QuitandaOnline.Pages.ClienteCRUD
             if (id == null)
                 return NotFound();
 
-            Cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.IdCliente == id);
+            Produto = await _context.Produtos.FirstOrDefaultAsync(c => c.IdProduto == id);
 
-            if(Cliente == null) return NotFound();
+            if(Produto == null) return NotFound();
 
             return Page();
         }
@@ -37,14 +37,14 @@ namespace QuitandaOnline.Pages.ClienteCRUD
         {
             if(!ModelState.IsValid) return NotFound();
 
-            _context.Attach(Cliente).State = EntityState.Modified;
+            _context.Attach(Produto).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
             }catch (DbUpdateConcurrencyException)
             {
-                if (!ClienteAindaExiste(Cliente.IdCliente))
+                if (!ProdutoAindaExiste(Produto.IdProduto))
                 {
                     return NotFound();
                 }
@@ -57,9 +57,9 @@ namespace QuitandaOnline.Pages.ClienteCRUD
             return RedirectToPage("./Listar");
         }
 
-        private bool ClienteAindaExiste(int idCliente)
+        private bool ProdutoAindaExiste(int idProduto)
         {
-            return _context.Clientes.Any(m => m.IdCliente == idCliente);
+            return _context.Produtos.Any(m => m.IdProduto == idProduto);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreWebApp.Models
+namespace QuitandaOnline.Models
 {
     public class Visitado
     {

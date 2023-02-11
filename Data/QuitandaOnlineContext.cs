@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreWebApp.Models;
+using QuitandaOnline.Models;
 
-namespace AspNetCoreWebApp.Data
+namespace QuitandaOnline.Data
 {
     public class QuitandaOnlineContext : DbContext
     {

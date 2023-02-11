@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreWebApp.Models
+namespace QuitandaOnline.Models
 {
     [Owned]
     public class Endereco

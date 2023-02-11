@@ -16,16 +16,18 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" asp-area="" asp-page="/Admin">Área Administrativa</a>
-                        <a class="nav-item nav-link" asp-area="" asp-page="/ProdutoCRUD/Index">Produtos</a>
+                        <a class="nav-item nav-link" asp-area="" asp-page="/ProdutoCRUD/Listar">Produtos</a>
                         <a class="nav-item nav-link" asp-area="" asp-page="/ClienteCRUD/Listar">Clientes</a>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
-    <main class="container flex-grow-1">
+    <section class="container">
+        <main role="main">
         @RenderBody()
-    </main>
+        </main>
+    </section>
         <footer class="footer bg-light text-center p-4 fixed-bottom">
         <div class="container">
             <span class="text-dark">Copyright &copy; 2023 - Todos os direitos reservados</span>
@@ -34,6 +36,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://friconix.com/cdn/friconix.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

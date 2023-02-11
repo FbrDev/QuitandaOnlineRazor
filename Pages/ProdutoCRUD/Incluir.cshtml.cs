@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace QuitandaOnline.Pages.ClienteCRUD
+namespace QuitandaOnline.Pages.ProdutoCRUD
 {
     public class IncluirModel : PageModel
     {
         private readonly QuitandaOnlineContext _context;
 
         [BindProperty]
-        public Cliente Cliente { get; set; }
+        public Produto Produto { get; set; }
 
         public IncluirModel(QuitandaOnlineContext context)
         {
@@ -25,13 +25,10 @@ namespace QuitandaOnline.Pages.ClienteCRUD
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var cliente = new Cliente();
-            cliente.Endereco= new Endereco();
-            cliente.Situacao = Cliente.SituacaoCliente.Cadastrado;
-
-            if(await TryUpdateModelAsync<Cliente>(cliente))
+            var produto = new Produto();
+            if(ModelState.IsValid)
             {
-                _context.Clientes.Add(cliente);
+                _context.Produtos.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Listar");
             }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using AspNetCoreWebApp.Data;
+using QuitandaOnline.Data;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Microsoft.Extensions.Configuration;
 
-namespace AspNetCoreWebApp
+namespace QuitandaOnline
 {
     public class Program
     {
@@ -20,7 +20,7 @@ namespace AspNetCoreWebApp
                 options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
             var app = builder.Build();
 

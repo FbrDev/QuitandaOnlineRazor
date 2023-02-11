@@ -1,5 +1,5 @@
-﻿using AspNetCoreWebApp.Data;
-using AspNetCoreWebApp.Models;
+﻿using QuitandaOnline.Data;
+using QuitandaOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AspNetCoreWebApp.Pages
+namespace QuitandaOnline.Pages
 {
     public class IndexModel : PageModel
     {

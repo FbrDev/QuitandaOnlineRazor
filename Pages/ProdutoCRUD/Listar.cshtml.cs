@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
-namespace QuitandaOnline.Pages.ClienteCRUD
+namespace QuitandaOnline.Pages.ProdutoCRUD
 {
     public class ListarModel : PageModel
     {
@@ -17,11 +18,11 @@ namespace QuitandaOnline.Pages.ClienteCRUD
             _context = context;
         }
 
-        public IList<Cliente> Clientes { get; set; }
+        public IList<Produto> Produtos { get; set; }
 
         public async Task OnGetAsync()
         {
-            Clientes = await _context.Clientes.ToListAsync();
+            Produtos = await _context.Produtos.OrderBy(p => p.Nome).ToListAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int? id)
@@ -31,10 +32,10 @@ namespace QuitandaOnline.Pages.ClienteCRUD
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(id);
 
-            if (cliente != null) {
-                _context.Clientes.Remove(cliente);
+            if (produto != null) {
+                _context.Produtos.Remove(produto);
                 await _context.SaveChangesAsync();
             }
 

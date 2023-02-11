@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace AspNetCoreWebApp.Pages
+namespace QuitandaOnline.Pages
 {
     public class PrivacyModel : PageModel
     {

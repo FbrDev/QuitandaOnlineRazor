@@ -1,0 +1,64 @@
+﻿@page
+@model QuitandaOnline.Pages.ProdutoCRUD.ListarModel
+@{
+    ViewData["titulo"] = "Listagem de Produtos";
+}
+
+<header class="container p-3">
+    <div class="row align-items-center">
+        <div class="col-sm-6"><h1>@ViewData["titulo"]</h1></div>
+        <div class="col-sm-6 text-right"><a asp-page="Incluir" class="btn btn-info" data-toggle="tooltip" title="Cadastrar um Novo Produto">Novo Produto</a></div>
+    </div>
+</header>
+
+@if (Model.Produtos.Count > 0)
+{
+    <main class="container">
+        <table class="table table-striped table-light table-sm table-hover">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Produtos[0].IdProduto)</th>
+                    <th>@Html.DisplayNameFor(m => m.Produtos[0].Nome)</th>
+                    <th>@Html.DisplayNameFor(m => m.Produtos[0].Preco)</th>
+                    <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.Produtos[0].Estoque)</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Produtos)
+                {
+                    <tr class="@(item.Estoque > 0 ? "" : "bg-info")">
+                        <td>@Html.DisplayFor(modelItem => item.IdProduto)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Preco)</td>
+                        <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.Estoque)</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm p-1" asp-page="./Alterar" asp-route-id="@item.IdProduto" data-toggle="tooltip" title="Alterar">
+                                <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                    <use xlink:href="/bi.svg#pencil-square" />
+                                </svg>
+                            </a>
+                            <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.IdProduto" method="post">
+                                <button class="btn btn-danger btn-sm p-1" onclick="confirmarExclusao(this);" type="button" data-toggle="tooltip" title="Excluir">
+                                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                        <use xlink:href="/bi.svg#trash" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+}
+else
+{
+    <h2>Não há produtos cadastrados.</h2>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_CustomConfirm");
+    }
+}
