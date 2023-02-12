@@ -21,9 +21,9 @@ namespace QuitandaOnline.Models
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [Column(TypeName = "decimal(18,2)")]
+        [DataType(DataType.Currency)]
         [DisplayName("Preço")]
-        public decimal? Preco { get; set; }
+        public double? Preco { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         public int? Estoque { get; set; }

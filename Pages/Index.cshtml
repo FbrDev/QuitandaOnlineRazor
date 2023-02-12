@@ -6,7 +6,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Bem vindo à Quitanda Online</h1>
-    <p>Este é um catálogo de produtos criado atráves da geração automática de CRUD baseada em modelo.</p>
+    <h4>Produtos frescos todos os dias, entregues na porta da sua casa.</h4>
+    <hr />
 </div>
 
 <div class="row">
@@ -27,19 +28,26 @@
     {
         @foreach (var produto in Model.Produtos)
         {
-            <div class="col-sm-3">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
                 <div class="card text-center bg-light mb-4">
                     <img class="card-img-top" src="/img/produto/@String.Concat(produto.IdProduto.ToString("D6"), ".jpg")" alt="Imagem de @produto.Nome">
                     <div class="card-header">
                         R$ @produto.Preco.Value.ToString("F2")
                     </div>
-                    <div class="card-body" style="height:124px;">
+                    <div class="card-body">
                         <h5 class="card-title">@produto.Nome</h5>
                         <p class="card-text">@produto.Descricao</p>
                     </div>
                     <div class="card-footer">
-                        <div><a href="#" class="btn btn-primary">Adicionar ao Carrinho</a></div>
-                        <small class="text-muted">Estoque: @produto.Estoque</small>
+                        @if (produto.Estoque > 0)
+                        {
+                            <div><a href="#" class="btn btn-danger">Adicionar ao Carrinho</a></div>
+                            <small class="text-success">Estoque: @produto.Estoque</small>
+                        }else
+                        {
+                            <div><button class="btn btn-light disabled" disabled><small>Aguardando Reabastecimento</small></button></div>
+                            <small class="text-danger"><b>Produto Esgotado</b></small>
+                        }
                     </div>
                 </div>
             </div>

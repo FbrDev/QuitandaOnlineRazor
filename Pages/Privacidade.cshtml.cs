@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace QuitandaOnline.Pages
 {
-    public class PrivacyModel : PageModel
+    public class PrivacidadeModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<PrivacidadeModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public PrivacidadeModel(ILogger<PrivacidadeModel> logger)
         {
             _logger = logger;
         }

@@ -1,11 +1,11 @@
 ﻿@page
 @model QuitandaOnline.Pages.ClienteCRUD.IncluirModel
 @{
-    ViewData["titulo"] = "Inclusão de cliente";
+    ViewData["titulo"] = "Inclusão de Cliente";
 }
 
 <main class="container mt-3">
-    <div class="row justify-content-center">
+    <div class="row justify-content-md-center">
         <div class="col-sm-12">
             <h1>@ViewData["titulo"]</h1>
             <hr />
@@ -29,6 +29,9 @@
                         <input asp-for="Cliente.DataNascimento" class="form-control col-2" />
                         <span asp-validation-for="Cliente.DataNascimento" class="text-danger"></span>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Contatos</legend>
                     <div class="form-group">
                         <label asp-for="Cliente.Email" class="control-label"></label>
                         <input asp-for="Cliente.Email" class="form-control col-4" />
@@ -37,7 +40,7 @@
                     <div class="form-group">
                         <label asp-for="Cliente.Telefone" class="control-label"></label>
                         <span>(com DDD, somente números)</span>
-                        <input asp-for="Cliente.Telefone" class="form-control col-2" placeholder="28999887766"/>
+                        <input asp-for="Cliente.Telefone" class="form-control col-2" placeholder="28999887766" />
                         <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
                     </div>
                 </fieldset>
@@ -47,18 +50,24 @@
                         <label asp-for="Cliente.Endereco.CEP" class="control-label"></label>
                         <span>(somente números)</span>
                         <div class="input-group">
-                            <input asp-for="Cliente.Endereco.CEP" class="form-control col-2"/>
+                            <input asp-for="Cliente.Endereco.CEP" class="form-control col-2" />
                             <div class="input-group-append">
                                 <span class="input-group-text p-1">
-                                    <i class="fi-xnsrsl-loading d-none" id="cep_loading"></i>
-                                    <i class="fi-xwsuxl-check d-none" id="cep_checked"></i>
-                                    <i class="fi-xwsuxl-times-wide" id="cep_none"></i>
+                                    <svg class="bi d-none" width="24" height="24" fill="currentColor" id="cep_loading">
+                                        <use xlink:href="/bi.svg#hourglass-split" />
+                                    </svg>
+                                    <svg class="bi d-none" width="24" height="24" fill="currentColor" id="cep_checked">
+                                        <use xlink:href="/bi.svg#check" />
+                                    </svg>
+                                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                        <use xlink:href="/bi.svg#x" />
+                                    </svg>
                                 </span>
                             </div>
                         </div>
                         <span class="text-muted d-block" id="endereco">Digite um CEP válido e aguarde.</span>
                         <span asp-validation-for="Cliente.Endereco.CEP" class="text-danger"></span>
-                        <input type="hidden" asp-for="Cliente.Endereco.Logradouro" value=""/>
+                        <input type="hidden" asp-for="Cliente.Endereco.Logradouro" value="" />
                         <span asp-validation-for="Cliente.Endereco.Logradouro" class="text-danger"></span>
                         <input type="hidden" asp-for="Cliente.Endereco.Bairro" value="" />
                         <input type="hidden" asp-for="Cliente.Endereco.Cidade" value="" />
@@ -80,17 +89,23 @@
                         <span asp-validation-for="Cliente.Endereco.Referencia" class="text-danger"></span>
                     </div>
                 </fieldset>
-                    <div class="form-group text-left">
-                        <a asp-page="./Listar" class="btn btn-info">Cancelar</a>
-                        <input type="submit" value="Salvar" class="btn btn-primary" />
-                    </div>
+                <div class="form-group text-left">
+                    <a asp-page="./Listar" class="btn btn-info">Cancelar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
             </form>
         </div>
     </div>
 </main>
 
-@section Scripts{
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @{await Html.RenderPartialAsync("_CustomConfirm");}
-    @{await Html.RenderPartialAsync("_ConsultaCEP");}
-}}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_CustomConfirm");
+    }
+    @{
+        await Html.RenderPartialAsync("_ConsultaCEP");
+    }
+}
