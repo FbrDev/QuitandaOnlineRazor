@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace QuitandaOnline.Pages
 {
@@ -22,9 +23,36 @@ namespace QuitandaOnline.Pages
             _context = context;
         }
 
-        public async Task OnGet()
+        public async Task OnGet([FromQuery(Name = "q")]string termoBusca, [FromQuery(Name = "o")] int? ordem)
         {
-            Produtos = await _context.Produtos.ToListAsync<Produto>();
+            var query = _context.Produtos.AsQueryable();
+
+            if (!string.IsNullOrEmpty(termoBusca))
+            {
+                query = query.Where(p => p.Nome.ToUpper().Contains(termoBusca.ToUpper()));
+            }
+
+            Produtos = await query.ToListAsync();
+
+            if (ordem.HasValue)
+            {
+                switch (ordem.Value)
+                {
+                    case 1:
+                        Produtos = Produtos.OrderBy(p => p.Nome).ToList();
+                        //query = query.OrderBy(p => p.Nome);
+                        break;
+                    case 2:
+                        Produtos = Produtos.OrderBy(p => p.Preco).ToList();
+                        //query = query.OrderBy(p => p.Preco);
+                        break;
+                    case 3:
+                        Produtos = Produtos.OrderByDescending(p => p.Nome).ToList();
+                        //query = query.OrderByDescending(p => p.Nome);
+                        break;
+                }
+            }
+
         }
     }
 }

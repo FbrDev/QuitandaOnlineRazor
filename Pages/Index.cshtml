@@ -10,6 +10,19 @@
 </div>
 
 <div class="row">
+
+    <div class="col-12 mb-3">
+        <form class="form-inline float-right">
+            <label>Ordem de Exibição:</label>&nbsp;
+            <select class="form-control custom-select-sm" id="selectOrdem">
+                <option value="0">Selecione a ordem desejada</option>
+                <option value="1">Ordenar pelo nome do produto</option>
+                <option value="2">Ordenar pelo menor preço</option>
+                <option value="3">Ordenar pelo maior preço</option>
+            </select>
+        </form>
+    </div>
+
     @if (Model.Produtos.Count > 0)
     {
         @foreach (var produto in Model.Produtos)
@@ -35,6 +48,45 @@
     }
     else
     {
-        <h1>Não há produtos cadastrados.</h1>
+        if (Request.QueryString.HasValue)
+        {
+            <div class="col-12">
+                <h1>Sua busca por <b>@Request.Query["termoBusca"]</b> não obteve resultados.</h1>
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+            <h1>Não há produtos cadastrados.</h1>
+            </div>
+        }
     }
 </div>
+
+@section Scripts{
+    <script>
+        function getUrlVars(){
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++){
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        $(document).ready(function(){
+            var qs = getUrlVars();
+            if(qs["o"] != null){
+                $("#selectOrdem").val(qs["o"]);
+                $("#o").val(qs["o"]);
+            }
+        });
+
+        $("#selectOrdem").change(function(){
+            $("#o").val($("#selectOrdem").val());
+            $("#formBusca").submit();
+        });
+    </script>
+}
