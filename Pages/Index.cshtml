@@ -11,19 +11,47 @@
 </div>
 
 <div class="row">
-
-    <div class="col-12 mb-3">
-        <form class="form-inline float-right">
-            <label>Ordem de Exibição:</label>&nbsp;
-            <select class="form-control custom-select-sm" id="selectOrdem">
-                <option value="0">Selecione a ordem desejada</option>
-                <option value="1">Ordenar pelo nome do produto</option>
-                <option value="2">Ordenar pelo menor preço</option>
-                <option value="3">Ordenar pelo maior preço</option>
-            </select>
+    <div class="col-12 col-md-6">
+        <form action="/Index" method="get" class="form-inline justify-content-center justify-content-md-start mb-sm-3 mb-md-0" id="formBusca">
+            <input type="text" name="q" id="q" placeholder="Nome do produto a buscar..." class="form-control form-control-sm mr-sm-2" />
+            <input type="hidden" name="o" id="o" value="0" />
+            <input type="hidden" name="p" id="p" value="1" />
+            <button class="btn btn-sm btn-success my-2 my-sm-0 form-control form-control-sm" type="submit">Buscar</button>
         </form>
     </div>
-
+    <div class="col-12 col-md-6">
+        <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
+            <form class="form-inline ml-3 d-inline-block">
+                <select class="form-control custom-select-sm selectOrdem">
+                    <option value="1">Ordenar pelo nome do produto</option>
+                    <option value="2">Ordenar pelo menor preço</option>
+                    <option value="3">Ordenar pelo maior preço</option>
+                </select>
+            </form>
+            <nav class="d-inline-block">
+                <ul class="pagination pagination-sm my-0">
+                    @for (int i = 1; i <= Model.QuantidadePaginas; i++)
+                    {
+                        if (i == Model.PaginaAtual)
+                        {
+                            <li class="page-item disabled">
+                                <button class="page-link" value="@i">@i</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <button class="page-link" value="@i">@i</button>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<hr class="mt-3" />
+<div class="row">
     @if (Model.Produtos.Count > 0)
     {
         @foreach (var produto in Model.Produtos)
@@ -43,7 +71,8 @@
                         {
                             <div><a href="#" class="btn btn-danger">Adicionar ao Carrinho</a></div>
                             <small class="text-success">Estoque: @produto.Estoque</small>
-                        }else
+                        }
+                        else
                         {
                             <div><button class="btn btn-light disabled" disabled><small>Aguardando Reabastecimento</small></button></div>
                             <small class="text-danger"><b>Produto Esgotado</b></small>
@@ -65,18 +94,51 @@
         else
         {
             <div class="col-12">
-            <h1>Não há produtos cadastrados.</h1>
+                <h1>Não há produtos cadastrados.</h1>
             </div>
         }
     }
 </div>
+<hr class="mt-0"/>
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
+            <form class="form-inline ml-3 d-inline-block">
+                <select class="form-control custom-select-sm selectOrdem">
+                    <option value="1">Ordenar pelo nome do produto</option>
+                    <option value="2">Ordenar pelo menor preço</option>
+                    <option value="3">Ordenar pelo maior preço</option>
+                </select>
+            </form>
+            <nav class="d-inline-block">
+                <ul class="pagination pagination-sm my-0">
+                    @for (int i = 1; i <= Model.QuantidadePaginas; i++)
+                    {
+                        if (i == Model.PaginaAtual)
+                        {
+                            <li class="page-item disabled">
+                                <button class="page-link" value="@i">@i</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <button class="page-link" value="@i">@i</button>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script>
-        function getUrlVars(){
+        function getUrlVars() {
             var vars = [], hash;
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for(var i = 0; i < hashes.length; i++){
+            for (var i = 0; i < hashes.length; i++) {
                 hash = hashes[i].split('=');
                 vars.push(hash[0]);
                 vars[hash[0]] = hash[1];
@@ -84,16 +146,27 @@
             return vars;
         }
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             var qs = getUrlVars();
-            if(qs["o"] != null){
-                $("#selectOrdem").val(qs["o"]);
+            if (qs["o"] != null) {
+                $(".selectOrdem").val(qs["o"]);
                 $("#o").val(qs["o"]);
+            } else {
+                $(".selectOrdem").val("1");
+                $("#o").val("1");
+            }
+            if (qs["q"] != null) {
+                $("#q").val(qs["q"]);
             }
         });
 
-        $("#selectOrdem").change(function(){
-            $("#o").val($("#selectOrdem").val());
+        $(".selectOrdem").change(function () {
+            $("#o").val($(this).val());
+            $("#formBusca").submit();
+        });
+
+        $(".page-link").click(function(){
+            $("#p").val($(this).val());
             $("#formBusca").submit();
         });
     </script>
