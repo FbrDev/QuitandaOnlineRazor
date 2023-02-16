@@ -1,0 +1,131 @@
+﻿@page
+@model QuitandaOnline.Pages.NovoClienteModel
+
+@{
+    ViewData["titulo"] = "Novo Cliente";
+}
+
+
+<div class="row justify-content-md-center">
+    <div class="col-sm-12">
+        <h1>Informe seus dados, por favor</h1>
+        <hr />
+        <form method="post" class="mt-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <fieldset>
+                        <legend>Dados Pessoais</legend>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Nome" class="control-label"></label>
+                            <input asp-for="Cliente.Nome" class="form-control col-12" />
+                            <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.CPF" class="control-label"></label>
+                            <span>(somente números)</span>
+                            <input asp-for="Cliente.CPF" class="form-control col-6 col-lg-4" />
+                            <span asp-validation-for="Cliente.CPF" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.DataNascimento" class="control-label"></label>
+                            <input asp-for="Cliente.DataNascimento" class="form-control col-6 col-lg-4" />
+                            <span asp-validation-for="Cliente.DataNascimento" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Contatos</legend>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Email" class="control-label"></label>
+                            <input asp-for="Cliente.Email" class="form-control col-12 col-lg-8" autocomplete="off" />
+                            <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Telefone" class="control-label"></label>
+                            <span>(com DDD, somente números)</span>
+                            <input asp-for="Cliente.Telefone" class="form-control col-6 col-lg-4" placeholder="28999887766" />
+                            <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <fieldset>
+                        <legend>Endereço</legend>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Endereco.CEP" class="control-label"></label>
+                            <span>(somente números)</span>
+                            <div class="input-group">
+                                <input asp-for="Cliente.Endereco.CEP" class="form-control col-6 col-lg-4" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text p-1">
+                                        <svg class="bi d-none" width="24" height="24" fill="currentColor" id="cep_loading">
+                                            <use xlink:href="/bi.svg#hourglass-split" />
+                                        </svg>
+                                        <svg class="bi d-none" width="24" height="24" fill="currentColor" id="cep_checked">
+                                            <use xlink:href="/bi.svg#check" />
+                                        </svg>
+                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                            <use xlink:href="/bi.svg#x" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="text-muted d-block" id="endereco">Digite um CEP válido e aguarde.</span>
+                            <span asp-validation-for="Cliente.Endereco.CEP" class="text-danger"></span>
+                            <input type="hidden" asp-for="Cliente.Endereco.Logradouro" value="" />
+                            <span asp-validation-for="Cliente.Endereco.Logradouro" class="text-danger"></span>
+                            <input type="hidden" asp-for="Cliente.Endereco.Bairro" value="" />
+                            <input type="hidden" asp-for="Cliente.Endereco.Cidade" value="" />
+                            <input type="hidden" asp-for="Cliente.Endereco.Estado" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Endereco.Numero" class="control-label"></label>
+                            <input asp-for="Cliente.Endereco.Numero" class="form-control col-6 col-lg-4" />
+                            <span asp-validation-for="Cliente.Endereco.Numero" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Endereco.Complemento" class="control-label"></label>
+                            <input asp-for="Cliente.Endereco.Complemento" class="form-control col-12 col-lg-8" />
+                            <span asp-validation-for="Cliente.Endereco.Complemento" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cliente.Endereco.Referencia" class="control-label"></label>
+                            <input asp-for="Cliente.Endereco.Referencia" class="form-control col-12 col-lg-8" />
+                            <span asp-validation-for="Cliente.Endereco.Referencia" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Senha de Acesso</legend>
+                        <div class="form-group">
+                            <label asp-for="SenhasUsuario.Senha" class="control-label"></label>
+                            <input asp-for="SenhasUsuario.Senha" class="form-control col-6 col-lg-5" autocomplete="off" />
+                            <span asp-validation-for="SenhasUsuario.Senha" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SenhasUsuario.ConfirmacaoSenha" class="control-label"></label>
+                            <input asp-for="SenhasUsuario.ConfirmacaoSenha" class="form-control col-6 col-lg-5" placeholder="Redigite sua senha" autocomplete="off" />
+                            <span asp-validation-for="SenhasUsuario.ConfirmacaoSenha" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group text-left">
+                <a asp-page="/Index" class="btn btn-info">Cancelar</a>
+                <input type="submit" value="Criar meu cadastro" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @{
+        await Html.RenderPartialAsync("_CustomConfirm");
+    }
+    @{
+        await Html.RenderPartialAsync("_ConsultaCEP");
+    }
+}

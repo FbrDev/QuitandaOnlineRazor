@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Hosting;
 using System;
 using Microsoft.Extensions.Configuration;
+using QuitandaOnline.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuitandaOnline
 {
@@ -20,6 +22,31 @@ namespace QuitandaOnline
                 options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
             // Add services to the container.
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true; //default = false
+                options.Password.RequireNonAlphanumeric = false; //default = true
+                options.Password.RequireUppercase = false; //default = true
+                options.Password.RequireLowercase = false; //default = true
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3
+                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5
+                options.SignIn.RequireConfirmedAccount = false; //default = false
+                options.SignIn.RequireConfirmedEmail = false; //default = false
+                options.SignIn.RequireConfirmedPhoneNumber = false; //default = false
+            }).AddEntityFrameworkStores<QuitandaOnlineContext>();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Login";
+                options.AccessDeniedPath = "/Login";
+                options.SlidingExpiration = true;
+            });
+
+            builder.Services.AddAuthorization();
+
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
             var app = builder.Build();
@@ -33,6 +60,7 @@ namespace QuitandaOnline
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();

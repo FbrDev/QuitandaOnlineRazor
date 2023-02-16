@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QuitandaOnline.Models;
 
 namespace QuitandaOnline.Data
 {
-    public class QuitandaOnlineContext : DbContext
+    public class QuitandaOnlineContext : IdentityDbContext<AppUser>
     {
         public QuitandaOnlineContext(DbContextOptions<QuitandaOnlineContext> options)
             : base(options)
@@ -16,6 +13,8 @@ namespace QuitandaOnline.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ItemPedido>()
                 .HasKey(e => new { e.IdPedido, e.IdProduto });
 
