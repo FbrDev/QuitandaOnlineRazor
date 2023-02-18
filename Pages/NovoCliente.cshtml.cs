@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using QuitandaOnline.Data;
 using QuitandaOnline.Models;
+using QuitandaOnline.Services;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace QuitandaOnline.Pages
@@ -31,14 +33,17 @@ namespace QuitandaOnline.Pages
         private readonly QuitandaOnlineContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEmailSender _emailSender;
 
         public NovoClienteModel(QuitandaOnlineContext context,
                                 UserManager<AppUser> userManager, 
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -108,16 +113,16 @@ namespace QuitandaOnline.Pages
                     if (afetados > 0)
                     {
                         //envia uma mensagem ao usuário para que ele confirme seu e-mail	
-                        //var token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
-                        //token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-                        //var urlConfirmacaoEmail = Url.Page("/ConfirmacaoEmail", null,
-                        //    new { userId = usuario.Id, token }, Request.Scheme);
-                        //StringBuilder msg = new StringBuilder();
-                        //msg.Append("<h1>Quitanda Online :: Confirmação de E-mail</h1>");
-                        //msg.Append($"<p>Por favor, confirme seu e-mail " +
-                        //    $"<a href='{HtmlEncoder.Default.Encode(urlConfirmacaoEmail)}'>clicando aqui</a>.</p>");
-                        //msg.Append("<p>Atenciosamente,<br>Equipe de Suporte Quitanda Online</p>");
-                        //await _emailSender.SendEmailAsync(usuario.Email, "Confirmação de E-mail", "", msg.ToString());
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
+                        token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+                        var urlConfirmacaoEmail = Url.Page("/ConfirmacaoEmail", null,
+                            new { userId = usuario.Id, token }, Request.Scheme);
+                        StringBuilder msg = new StringBuilder();
+                        msg.Append("<h1>Quitanda Online :: Confirmação de E-mail</h1>");
+                        msg.Append($"<p>Por favor, confirme seu e-mail " +
+                            $"<a href='{HtmlEncoder.Default.Encode(urlConfirmacaoEmail)}'>clicando aqui</a>.</p>");
+                        msg.Append("<p>Atenciosamente,<br>Equipe de Suporte Quitanda Online</p>");
+                        await _emailSender.SendEmailAsync(usuario.Email, "Confirmação de E-mail", "", msg.ToString());
 
                         return RedirectToPage("/CadastroRealizado");
                     }

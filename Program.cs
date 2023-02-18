@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using QuitandaOnline.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using QuitandaOnline.Entities;
+using QuitandaOnline.Services;
 
 namespace QuitandaOnline
 {
@@ -40,9 +42,11 @@ namespace QuitandaOnline
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3
                 options.Lockout.MaxFailedAccessAttempts = 3; //default = 5
                 options.SignIn.RequireConfirmedAccount = false; //default = false
-                options.SignIn.RequireConfirmedEmail = false; //default = false
+                options.SignIn.RequireConfirmedEmail = true; //default = false
                 options.SignIn.RequireConfirmedPhoneNumber = false; //default = false
-            }).AddEntityFrameworkStores<QuitandaOnlineContext>();
+            })
+                .AddEntityFrameworkStores<QuitandaOnlineContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
@@ -69,6 +73,9 @@ namespace QuitandaOnline
                     options.Cookie.IsEssential = true;
                 })
                 .AddRazorRuntimeCompilation();
+
+            builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailConfiguration"));
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             var app = builder.Build();
 

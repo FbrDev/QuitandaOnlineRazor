@@ -1,0 +1,38 @@
+﻿@page
+@model QuitandaOnline.Pages.RedefinirSenhaModel
+@{
+    ViewData["titulo"] = "Redefinição de Senha";
+}
+
+<div class="row justify-content-center">
+    <form class="form-signin align-self-center" method="post" asp-page="/EsqueciSenha">
+        <h1 class="mt-5 mb-3 font-weight-normal">Redefinição de Senha</h1>
+
+        <style type="text/css">
+            .val-summary ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+
+        <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="Dados.Token" />
+
+        <input asp-for="Dados.Email" class="form-control" placeholder="Digite aqui seu e-mail" required autofocus />
+        <span asp-validation-for="Dados.Email" class="text-danger"></span>
+
+        <input asp-for="Dados.Senha" class="form-control mt-3" placeholder="Digite aqui sua nova senha" required />
+        <span asp-validation-for="Dados.Senha" class="text-danger"></span>
+
+        <input asp-for="Dados.ConfirmacaoSenha" class="form-control mt-3" placeholder="Confirme aqui sua nova senha" />
+        <span asp-validation-for="Dados.ConfirmacaoSenha" class="text-danger"></span>
+
+        <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Redefinir Senha</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
