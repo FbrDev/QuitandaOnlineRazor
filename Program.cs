@@ -10,6 +10,7 @@ using System;
 using Microsoft.Extensions.Configuration;
 using QuitandaOnline.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace QuitandaOnline
 {
@@ -22,6 +23,13 @@ namespace QuitandaOnline
                 options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
             // Add services to the container.
+
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+            {
+                //habilita a necessidade de consentimento para uso de cookie
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
@@ -45,9 +53,22 @@ namespace QuitandaOnline
                 options.SlidingExpiration = true;
             });
 
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(option =>
+            {
+                //adiciona politica de acesso chamada isAdmin
+                option.AddPolicy("isAdmin", policy => policy.RequireRole("admin"));
+            });
 
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizePage("/Admin", "isAdmin");
+                options.Conventions.AuthorizeFolder("/ProdutoCRUD", "isAdmin");
+            })
+                .AddCookieTempDataProvider(options =>
+                {
+                    options.Cookie.IsEssential = true;
+                })
+                .AddRazorRuntimeCompilation();
 
             var app = builder.Build();
 
@@ -57,6 +78,7 @@ namespace QuitandaOnline
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 

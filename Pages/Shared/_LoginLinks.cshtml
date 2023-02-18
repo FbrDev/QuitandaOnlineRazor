@@ -12,7 +12,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
             <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="" asp-page="/Index" title="Manage">Olá,  @appUser.Nome.Substring(0, appUser.Nome.IndexOf(' '))!</a>
+                <a id="manage" class="nav-link text-dark" asp-area="" asp-page="/Index" title="Manage">Olá,  @appUser.Nome!</a>
 
             </li>
             <li class="nav-item">

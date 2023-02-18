@@ -6,9 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuitandaOnline.Pages.ClienteCRUD
 {
+    [Authorize(Policy = "isAdmin")]
     public class AlterarModel : PageModel
     {
         private readonly QuitandaOnlineContext _context;

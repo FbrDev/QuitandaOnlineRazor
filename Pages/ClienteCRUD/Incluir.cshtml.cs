@@ -3,9 +3,11 @@ using QuitandaOnline.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuitandaOnline.Pages.ClienteCRUD
 {
+    [Authorize(Policy = "isAdmin")]
     public class IncluirModel : PageModel
     {
         private readonly QuitandaOnlineContext _context;

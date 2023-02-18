@@ -38,10 +38,30 @@
                         <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" asp-page="./Alterar" asp-route-id="@item.IdCliente">Alterar</a>
+                            <a class="btn btn-primary btn-sm" asp-page="./Alterar" asp-route-id="@item.IdCliente"><i class="fi-xnsuxl-edit-solid"></i></a>
                             <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.IdCliente" method="post">
-                                <button class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);" type="button">Excluir</button>
+                                <button class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);" type="button"><i class="fi-xnsuxl-trash-bin"></i></button>
                             </form>
+                            @if (Model.EmailsAdmins.Contains(item.Email))
+                            {
+                                <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdCliente" method="post">
+                                    <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
+                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                            <use xlink:href="/bi.svg#person" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdCliente" method="post">
+                                    <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
+                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                            <use xlink:href="/bi.svg#shield-lock" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            }
                         </td>
                     </tr>
                 }
@@ -55,5 +75,7 @@
 </main>
 
 @section Scripts{
-    @{await Html.RenderPartialAsync("_CustomConfirm");}
+    @{
+        await Html.RenderPartialAsync("_CustomConfirm");
+    }
 }
