@@ -41,20 +41,55 @@
             </div>
         </div>
     </nav>
-    <header>
+
+    <header class="container">
+        <div id="carouselMain" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselMain" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselMain" data-bs-slide-to="1" class="active"></li>
+                <li data-bs-target="#carouselMain" data-bs-slide-to="2" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active text-center" data-bs-interval="3000">
+                    <img src="~/img/slides/slide01.jpg" alt="" class="img-fluid d-none d-md-block" />
+                    <img src="~/img/slides/slide01small.jpg" alt="" class="img-fluid d-block d-md-none" />
+                </div>
+                <div class="carousel-item text-center" data-bs-interval="3000">
+                    <img src="~/img/slides/slide01.jpg" alt="" class="img-fluid d-none d-md-block" />
+                    <img src="~/img/slides/slide01small.jpg" alt="" class="img-fluid d-block d-md-none" />
+                </div>
+                <div class="carousel-item text-center" data-bs-interval="3000">
+                    <img src="~/img/slides/slide01.jpg" alt="" class="img-fluid d-none d-md-block" />
+                    <img src="~/img/slides/slide01small.jpg" alt="" class="img-fluid d-block d-md-none" />
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselMain" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselMain" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Próximo</span>
+            </a>
+        </div>
+        <hr class="mt-3"/>
     </header>
+
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top fixed-bottom text-muted bg-light">
         <div class="container">
-            <div class="row">
-                <div class="col-8 col-sm-8">
-                    &copy; 2023 - Quitanda Online - <a asp-area="" asp-page="/Privacidade">Política de Privacidade</a>
+            <div class="row py-3">
+                <div class="col-12 col-md-4 text-center text-md-start">
+                    &copy; 2023 - Quitanda Online
                 </div>
-                <div class="col-4 col-sm-4 text-right">
-                    <a asp-area="" asp-page="/Admin">Administrar</a>
+                <div class="col-12 col-md-4 text-center">
+                    <a class="text-decoration-none text-dark" asp-page="/Privacidade">Política de Privacidade</a>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-end">
+                    <a class="text-decoration-none text-dark" asp-page="/Admin">Administrar</a>
                 </div>
             </div>
         </div>
