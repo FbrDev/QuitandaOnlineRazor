@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(m => m.Clientes[0].Nome)</th>
-                    <th>@Html.DisplayNameFor(m => m.Clientes[0].CPF)</th>
-                    <th>@Html.DisplayNameFor(m => m.Clientes[0].DataNascimento)</th>
+                    <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.Clientes[0].CPF)</th>
+                    <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.Clientes[0].DataNascimento)</th>
                     <th>@Html.DisplayNameFor(m => m.Clientes[0].Email)</th>
                     <th>Ações</th>
                 </tr>
@@ -34,8 +34,8 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Nome)</td>
                         <!--<td>@*@Html.DisplayFor(modelItem => item.CPF, "_CustomCPF")*@</td>-->
-                        <td>@Html.DisplayFor(modelItem => item.CPF)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+                        <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.CPF)</td>
+                        <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.DataNascimento)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td class="text-center">
                             <a class="btn btn-primary btn-sm" asp-page="./Alterar" asp-route-id="@item.IdCliente"><i class="fi-xnsuxl-edit-solid"></i></a>

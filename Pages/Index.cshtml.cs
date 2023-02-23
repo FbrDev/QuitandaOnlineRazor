@@ -37,7 +37,7 @@ namespace QuitandaOnline.Pages
 
             if (!string.IsNullOrEmpty(termoBusca))
             {
-                query = query.Where(p => p.Nome.ToUpper().Contains(termoBusca.ToUpper()));
+                query = query.Where(p => p.Nome.ToLower().Contains(termoBusca.ToLower()));
             }
 
             if (ordem.HasValue)
@@ -45,7 +45,7 @@ namespace QuitandaOnline.Pages
                 switch (ordem.Value)
                 {
                     case 1:
-                        query = query.OrderBy(p => p.Nome.ToUpper());
+                        query = query.OrderBy(p => p.Nome.ToLower());
                         break;
                     case 2:
                         query = query.OrderBy(p => p.Preco);

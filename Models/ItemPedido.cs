@@ -15,9 +15,17 @@ namespace QuitandaOnline.Models
         public float Quantidade { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Valor Unitário")]
-        public decimal ValorUnitario { get; set; }
+        public double ValorUnitario { get; set; }
+
+        [NotMapped]
+        public double ValorItem
+        {
+            get
+            {
+                return Quantidade * ValorUnitario;
+            }
+        }
 
         [ForeignKey("IdPedido")]
         public Pedido Pedido { get; set; }

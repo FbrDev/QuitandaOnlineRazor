@@ -11,6 +11,7 @@ namespace QuitandaOnline.Models
     {
         public enum SituacaoPedido
         {
+            Carrinho,
             Cancelado,
             Realizado,
             Verificado,
@@ -27,21 +28,22 @@ namespace QuitandaOnline.Models
         public DateTime DataHoraPedido { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Valor Total")]
-        public decimal ValorTotal { get; set; }
+        public double ValorTotal { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [Display(Name = "Situação")]
         public SituacaoPedido Situacao { get; set; }
 
-        public int IdCliente { get; set; }
+        public int? IdCliente { get; set; }
+
+        public string IdCarrinho { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
 
         public Endereco Endereco { get; set; }
 
-        public ICollection<ItemPedido> ItemPedido { get; set; }
+        public ICollection<ItemPedido> ItensPedido { get; set; }
     }
 }

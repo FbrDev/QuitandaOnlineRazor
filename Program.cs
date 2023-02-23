@@ -21,8 +21,6 @@ namespace QuitandaOnline
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<QuitandaOnlineContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 
             // Add services to the container.
 
@@ -74,6 +72,11 @@ namespace QuitandaOnline
                 })
                 .AddRazorRuntimeCompilation();
 
+            builder.Services.AddMvc();
+
+            builder.Services.AddDbContext<QuitandaOnlineContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
+
             builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailConfiguration"));
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
@@ -93,6 +96,7 @@ namespace QuitandaOnline
             app.UseAuthorization();
 
             app.MapRazorPages();
+            app.MapControllers();
 
             app.Run();
 

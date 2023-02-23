@@ -277,8 +277,8 @@ namespace QuitandaOnline.Migrations
                     b.Property<float>("Quantidade")
                         .HasColumnType("REAL");
 
-                    b.Property<decimal>("ValorUnitario")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("ValorUnitario")
+                        .HasColumnType("REAL");
 
                     b.HasKey("IdPedido", "IdProduto");
 
@@ -296,14 +296,17 @@ namespace QuitandaOnline.Migrations
                     b.Property<DateTime>("DataHoraPedido")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("IdCliente")
+                    b.Property<string>("IdCarrinho")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("IdCliente")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Situacao")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("REAL");
 
                     b.HasKey("IdPedido");
 
@@ -488,7 +491,7 @@ namespace QuitandaOnline.Migrations
             modelBuilder.Entity("QuitandaOnline.Models.ItemPedido", b =>
                 {
                     b.HasOne("QuitandaOnline.Models.Pedido", "Pedido")
-                        .WithMany("ItemPedido")
+                        .WithMany("ItensPedido")
                         .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -496,7 +499,7 @@ namespace QuitandaOnline.Migrations
                     b.HasOne("QuitandaOnline.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("IdProduto")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Pedido");
@@ -509,8 +512,7 @@ namespace QuitandaOnline.Migrations
                     b.HasOne("QuitandaOnline.Models.Cliente", "Cliente")
                         .WithMany("Pedidos")
                         .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.OwnsOne("QuitandaOnline.Models.Endereco", "Endereco", b1 =>
                         {
@@ -594,7 +596,7 @@ namespace QuitandaOnline.Migrations
 
             modelBuilder.Entity("QuitandaOnline.Models.Pedido", b =>
                 {
-                    b.Navigation("ItemPedido");
+                    b.Navigation("ItensPedido");
                 });
 #pragma warning restore 612, 618
         }

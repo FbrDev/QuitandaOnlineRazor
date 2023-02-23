@@ -21,13 +21,16 @@
     </div>
     <div class="col-12 col-md-6">
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
-            <form class="form-inline ml-3 d-inline-block">
-                <select class="form-control custom-select-sm selectOrdem">
+            @if (Model.Produtos.Count > 1)
+            {
+                <form class="form-inline ml-3 d-inline-block">
+                    <select class="form-control custom-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
                     <option value="1">Ordenar pelo nome do produto</option>
                     <option value="2">Ordenar pelo menor preço</option>
                     <option value="3">Ordenar pelo maior preço</option>
                 </select>
             </form>
+            }
             <nav class="d-inline-block">
                 <ul class="pagination pagination-sm my-0">
                     @for (int i = 1; i <= Model.QuantidadePaginas; i++)
@@ -69,7 +72,12 @@
                     <div class="card-footer">
                         @if (produto.Estoque > 0)
                         {
-                            <div><a href="#" class="btn btn-danger">Adicionar ao Carrinho</a></div>
+                            <form class="d-inline-block" asp-page="/Carrinho" asp-page-handler="AddToCart"
+                      asp-route-id="@produto.IdProduto" method="post">
+                                <button type="submit" class="btn btn-danger">
+                                    Adicionar ao Carrinho
+                                </button>
+                            </form>
                             <small class="text-success">Estoque: @produto.Estoque</small>
                         }
                         else
@@ -103,13 +111,16 @@
 <div class="row">
     <div class="col-12">
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
-            <form class="form-inline ml-3 d-inline-block">
-                <select class="form-control custom-select-sm selectOrdem">
+            @if (Model.Produtos.Count > 1)
+            {
+                <form class="form-inline ml-3 d-inline-block">
+                    <select class="form-control custom-select-sm selectOrdem">
                     <option value="1">Ordenar pelo nome do produto</option>
                     <option value="2">Ordenar pelo menor preço</option>
                     <option value="3">Ordenar pelo maior preço</option>
                 </select>
             </form>
+            }
             <nav class="d-inline-block">
                 <ul class="pagination pagination-sm my-0">
                     @for (int i = 1; i <= Model.QuantidadePaginas; i++)
@@ -156,7 +167,7 @@
                 $("#o").val("1");
             }
             if (qs["q"] != null) {
-                $("#q").val(qs["q"]);
+                $("#q").val(decodeURI(qs["q"]));
             }
         });
 

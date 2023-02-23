@@ -23,6 +23,27 @@ namespace QuitandaOnline.Data
 
             modelBuilder.Entity<Visitado>()
                 .HasKey(e => new { e.IdCliente, e.IdProduto });
+
+            //restringe a exclusão de clientes que possuem pedidos
+            modelBuilder.Entity<Pedido>()
+                .HasOne<Cliente>(p => p.Cliente)
+                .WithMany(c => c.Pedidos)
+                .HasForeignKey(p => p.IdCliente)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //exclui automaticamento os itens de um pedido quando um pedido é excluído
+            modelBuilder.Entity<ItemPedido>()
+                .HasOne<Pedido>(ip => ip.Pedido)
+                .WithMany(p => p.ItensPedido)
+                .HasForeignKey(p => p.IdPedido)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //restringe exclusão de produtos que possuem itens pedidos
+            modelBuilder.Entity<ItemPedido>()
+                .HasOne<Produto>(ip => ip.Produto)
+                .WithMany()
+                .HasForeignKey(p => p.IdProduto)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Produto> Produtos { get; set; }
