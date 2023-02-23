@@ -18,9 +18,9 @@
 <main class="container">
     @if (Model.Clientes.Count > 0)
     {
-        <table class="table">
+        <table class="table table-striped table-light table-sm table-hover">
             <thead>
-                <tr>
+                <tr class="bg-dark text-white">
                     <th>@Html.DisplayNameFor(m => m.Clientes[0].Nome)</th>
                     <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.Clientes[0].CPF)</th>
                     <th class="d-none d-lg-table-cell">@Html.DisplayNameFor(m => m.Clientes[0].DataNascimento)</th>
@@ -38,15 +38,23 @@
                         <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.DataNascimento)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" asp-page="./Alterar" asp-route-id="@item.IdCliente"><i class="fi-xnsuxl-edit-solid"></i></a>
+                            <a class="btn btn-primary btn-sm p-1" asp-page="./Alterar" asp-route-id="@item.IdCliente" data-toggle="tooltip" title="Alterar">
+                                <svg class="bi" width="24" height="24" fill="currentColor">
+                                    <use xlink:href="/bi.svg#pencil-square" />
+                                </svg>
+                            </a>
                             <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.IdCliente" method="post">
-                                <button class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);" type="button"><i class="fi-xnsuxl-trash-bin"></i></button>
+                                <button class="btn btn-danger btn-sm p-1" onclick="confirmarExclusao(this);" type="button" data-toggle="tooltip" title="Excluir">
+                                    <svg class="bi" width="24" height="24" fill="currentColor">
+                                        <use xlink:href="/bi.svg#trash" />
+                                    </svg>
+                                </button>
                             </form>
                             @if (Model.EmailsAdmins.Contains(item.Email))
                             {
                                 <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdCliente" method="post">
                                     <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
-                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                        <svg class="bi" width="24" height="24" fill="currentColor">
                                             <use xlink:href="/bi.svg#person" />
                                         </svg>
                                     </button>
@@ -56,7 +64,7 @@
                             {
                                 <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdCliente" method="post">
                                     <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
-                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                                        <svg class="bi" width="24" height="24" fill="currentColor">
                                             <use xlink:href="/bi.svg#shield-lock" />
                                         </svg>
                                     </button>

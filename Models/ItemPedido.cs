@@ -19,6 +19,7 @@ namespace QuitandaOnline.Models
         public double ValorUnitario { get; set; }
 
         [NotMapped]
+        [Display(Name = "Valor do Item")]
         public double ValorItem
         {
             get
