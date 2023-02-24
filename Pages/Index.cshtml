@@ -4,32 +4,28 @@
     ViewData["titulo"] = "Página Principal";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem vindo à Quitanda Online</h1>
-    <h4>Produtos frescos todos os dias, entregues na porta da sua casa.</h4>
-    <hr />
-</div>
-
 <div class="row">
-    <div class="col-12 col-md-6">
-        <form action="/Index" method="get" class="form-inline justify-content-center justify-content-md-start mb-sm-3 mb-md-0" id="formBusca">
-            <input type="text" name="q" id="q" placeholder="Nome do produto a buscar..." class="form-control form-control-sm mr-sm-2" />
-            <input type="hidden" name="o" id="o" value="0" />
-            <input type="hidden" name="p" id="p" value="1" />
-            <button class="btn btn-sm btn-success my-2 my-sm-0 form-control form-control-sm" type="submit">Buscar</button>
+    <div class="col-12 col-md-5">
+        <form action="/Index" method="get" class="justify-content-center justify-content-md-start mb-3 mb-md-0" id="formBusca">
+            <div class="input-group input-group-sm">
+                <input type="text" name="q" id="q" placeholder="Digite o nome do produto" class="form-control " />
+                <input type="hidden" name="o" id="o" value="0" />
+                <input type="hidden" name="p" id="p" value="1" />
+                <button class="btn btn-danger" type="submit">Buscar</button>
+            </div>
         </form>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-7">
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
             @if (Model.Produtos.Count > 1)
             {
-                <form class="form-inline ml-3 d-inline-block">
-                    <select class="form-control custom-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
-                    <option value="1">Ordenar pelo nome do produto</option>
-                    <option value="2">Ordenar pelo menor preço</option>
-                    <option value="3">Ordenar pelo maior preço</option>
-                </select>
-            </form>
+                <form class="ml-3 d-inline-block">
+                    <select class="form-select form-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
+                        <option value="1">Ordenar pelo nome do produto</option>
+                        <option value="2">Ordenar pelo menor preço</option>
+                        <option value="3">Ordenar pelo maior preço</option>
+                    </select>
+                </form>
             }
             <nav class="d-inline-block">
                 <ul class="pagination pagination-sm my-0">
@@ -54,25 +50,30 @@
     </div>
 </div>
 <hr class="mt-3" />
-<div class="row">
+<div class="row g-3">
     @if (Model.Produtos.Count > 0)
     {
         @foreach (var produto in Model.Produtos)
         {
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
-                <div class="card text-center bg-light mb-4">
+                <div class="card text-center bg-light">
+                    <a href="#" class="position-absolute right-0 p-2 text-danger">
+                        <svg class="bi" width="24" height="24" fill="currentColor">
+                            <use xlink:href="~/bi.svg#suit-heart" />
+                        </svg>
+                    </a>
                     <img class="card-img-top" src="/img/produto/@String.Concat(produto.IdProduto.ToString("D6"), ".jpg")" alt="Imagem de @produto.Nome">
                     <div class="card-header">
                         R$ @produto.Preco.Value.ToString("F2")
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@produto.Nome</h5>
-                        <p class="card-text">@produto.Descricao</p>
+                        <p class="card-text truncate-3l">@produto.Descricao</p>
                     </div>
                     <div class="card-footer">
                         @if (produto.Estoque > 0)
                         {
-                            <form class="d-inline-block" asp-page="/Carrinho" asp-page-handler="AddToCart"
+                            <form class="d-block" asp-page="/Carrinho" asp-page-handler="AddToCart"
                       asp-route-id="@produto.IdProduto" method="post">
                                 <button type="submit" class="btn btn-danger">
                                     Adicionar ao Carrinho
@@ -82,7 +83,7 @@
                         }
                         else
                         {
-                            <div><button class="btn btn-light disabled" disabled><small>Aguardando Reabastecimento</small></button></div>
+                            <div><button class="btn btn-light disabled" disabled><small>Reabastecendo Estoque</small></button></div>
                             <small class="text-danger"><b>Produto Esgotado</b></small>
                         }
                     </div>
@@ -107,19 +108,19 @@
         }
     }
 </div>
-<hr class="mt-0"/>
-<div class="row">
+<hr class="mt-3" />
+<div class="row pb-4">
     <div class="col-12">
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
             @if (Model.Produtos.Count > 1)
             {
-                <form class="form-inline ml-3 d-inline-block">
-                    <select class="form-control custom-select-sm selectOrdem">
-                    <option value="1">Ordenar pelo nome do produto</option>
-                    <option value="2">Ordenar pelo menor preço</option>
-                    <option value="3">Ordenar pelo maior preço</option>
-                </select>
-            </form>
+                <form class="ml-3 d-inline-block">
+                    <select class="form-select form-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
+                        <option value="1">Ordenar pelo nome do produto</option>
+                        <option value="2">Ordenar pelo menor preço</option>
+                        <option value="3">Ordenar pelo maior preço</option>
+                    </select>
+                </form>
             }
             <nav class="d-inline-block">
                 <ul class="pagination pagination-sm my-0">
@@ -176,7 +177,7 @@
             $("#formBusca").submit();
         });
 
-        $(".page-link").click(function(){
+        $(".page-link").click(function () {
             $("#p").val($(this).val());
             $("#formBusca").submit();
         });

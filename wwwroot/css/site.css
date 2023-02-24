@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+p.truncate-3l{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
