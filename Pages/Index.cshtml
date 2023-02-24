@@ -19,7 +19,7 @@
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
             @if (Model.Produtos.Count > 1)
             {
-                <form class="ml-3 d-inline-block">
+                <form class="mx-3 d-inline-block">
                     <select class="form-select form-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
                         <option value="1">Ordenar pelo nome do produto</option>
                         <option value="2">Ordenar pelo menor preço</option>
@@ -59,7 +59,7 @@
                 <div class="card text-center bg-light">
                     <a href="#" class="position-absolute right-0 p-2 text-danger">
                         <svg class="bi" width="24" height="24" fill="currentColor">
-                            <use xlink:href="~/bi.svg#suit-heart" />
+                            <use xlink:href="/bi.svg#suit-heart" />
                         </svg>
                     </a>
                     <img class="card-img-top" src="/img/produto/@String.Concat(produto.IdProduto.ToString("D6"), ".jpg")" alt="Imagem de @produto.Nome">
@@ -114,7 +114,7 @@
         <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
             @if (Model.Produtos.Count > 1)
             {
-                <form class="ml-3 d-inline-block">
+                <form class="mx-3 d-inline-block">
                     <select class="form-select form-select-sm selectOrdem" @(Model.Produtos.Count <= 1 ? "disabled" : "")>
                         <option value="1">Ordenar pelo nome do produto</option>
                         <option value="2">Ordenar pelo menor preço</option>
