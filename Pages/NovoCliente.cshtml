@@ -3,6 +3,7 @@
 
 @{
     ViewData["titulo"] = "Novo Cliente";
+    Layout = "_Layout";
 }
 
 
@@ -14,47 +15,47 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                 <div class="col-sm-12 col-md-6">
-                    <fieldset>
+                    <fieldset class="row">
                         <legend>Dados Pessoais</legend>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Nome" class="control-label"></label>
-                            <input asp-for="Cliente.Nome" class="form-control col-12" />
+                        <div class="mb-3">
+                            <label asp-for="Cliente.Nome" class="form-label"></label>
+                            <input asp-for="Cliente.Nome" class="form-control" />
                             <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.CPF" class="control-label"></label>
-                            <span>(somente números)</span>
-                            <input asp-for="Cliente.CPF" class="form-control col-6 col-lg-4" />
+                        <div class="mb-3 col-md-6 col-xl-4">
+                            <label asp-for="Cliente.CPF" class="form-label"></label>
+                            <span class="form-text">(somente números)</span>
+                            <input asp-for="Cliente.CPF" class="form-control" />
                             <span asp-validation-for="Cliente.CPF" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.DataNascimento" class="control-label"></label>
-                            <input asp-for="Cliente.DataNascimento" class="form-control col-6 col-lg-4" />
+                        <div class="mb-3 col-md-6 col-xl-4">
+                            <label asp-for="Cliente.DataNascimento" class="form-label"></label>
+                            <input asp-for="Cliente.DataNascimento" class="form-control" />
                             <span asp-validation-for="Cliente.DataNascimento" class="text-danger"></span>
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Contatos</legend>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Email" class="control-label"></label>
+                        <div class="mb-3 col-md-8">
+                            <label asp-for="Cliente.Email" class="form-label"></label>
                             <input asp-for="Cliente.Email" class="form-control col-12 col-lg-8" autocomplete="off" />
                             <span asp-validation-for="Cliente.Email" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Telefone" class="control-label"></label>
-                            <span>(com DDD, somente números)</span>
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="Cliente.Telefone" class="form-label"></label>
+                            <span class="form-text">(com DDD, somente números)</span>
                             <input asp-for="Cliente.Telefone" class="form-control col-6 col-lg-4" placeholder="28999887766" />
                             <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
                         </div>
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <fieldset>
+                    <fieldset class="row">
                         <legend>Endereço</legend>
-                        <div class="form-group">
+                        <div class=" mb-3 form-group">
                             <label asp-for="Cliente.Endereco.CEP" class="control-label"></label>
                             <span>(somente números)</span>
-                            <div class="input-group">
+                            <div class="input-group mb-2">
                                 <input asp-for="Cliente.Endereco.CEP" class="form-control col-6 col-lg-4" />
                                 <div class="input-group-append">
                                     <span class="input-group-text p-1">
@@ -78,31 +79,31 @@
                             <input type="hidden" asp-for="Cliente.Endereco.Cidade" value="" />
                             <input type="hidden" asp-for="Cliente.Endereco.Estado" value="" />
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Endereco.Numero" class="control-label"></label>
+                        <div class="mb-3 col-md-4">
+                            <label asp-for="Cliente.Endereco.Numero" class="form-label"></label>
                             <input asp-for="Cliente.Endereco.Numero" class="form-control col-6 col-lg-4" />
                             <span asp-validation-for="Cliente.Endereco.Numero" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Endereco.Complemento" class="control-label"></label>
+                        <div class="mb-3 col-md-8">
+                            <label asp-for="Cliente.Endereco.Complemento" class="form-label"></label>
                             <input asp-for="Cliente.Endereco.Complemento" class="form-control col-12 col-lg-8" />
                             <span asp-validation-for="Cliente.Endereco.Complemento" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cliente.Endereco.Referencia" class="control-label"></label>
+                        <div class="mb-3">
+                            <label asp-for="Cliente.Endereco.Referencia" class="form-label"></label>
                             <input asp-for="Cliente.Endereco.Referencia" class="form-control col-12 col-lg-8" />
                             <span asp-validation-for="Cliente.Endereco.Referencia" class="text-danger"></span>
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Senha de Acesso</legend>
-                        <div class="form-group">
-                            <label asp-for="SenhasUsuario.Senha" class="control-label"></label>
+                        <div class="mb-3">
+                            <label asp-for="SenhasUsuario.Senha" class="form-label"></label>
                             <input asp-for="SenhasUsuario.Senha" class="form-control col-6 col-lg-5" autocomplete="off" />
                             <span asp-validation-for="SenhasUsuario.Senha" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="SenhasUsuario.ConfirmacaoSenha" class="control-label"></label>
+                        <div class="mb-3">
+                            <label asp-for="SenhasUsuario.ConfirmacaoSenha" class="form-label"></label>
                             <input asp-for="SenhasUsuario.ConfirmacaoSenha" class="form-control col-6 col-lg-5" placeholder="Redigite sua senha" autocomplete="off" />
                             <span asp-validation-for="SenhasUsuario.ConfirmacaoSenha" class="text-danger"></span>
                         </div>
@@ -110,9 +111,13 @@
                 </div>
             </div>
             <hr />
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" value="" id="chkPromocoes"/>
+                <label for="chkPromocoes" class="form-check-label">Desejo receber informações sobre promoções.</label>
+            </div>
             <div class="form-group text-left">
-                <a asp-page="/Index" class="btn btn-info">Cancelar</a>
-                <input type="submit" value="Criar meu cadastro" class="btn btn-primary" />
+                <a asp-page="/Index" class="btn btn-light btn-outline-danger">Cancelar</a>
+                <input type="submit" value="Criar meu cadastro" class="btn btn-danger" />
             </div>
         </form>
     </div>
