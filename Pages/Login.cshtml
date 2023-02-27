@@ -2,10 +2,13 @@
 @model LoginModel
 @{
     ViewData["titulo"] = "Login de Usuário";
+    Layout = "_Layout";
 }
 
 <div class="row justify-content-center">
-    <form class="form-signin align-self-center" method="post" asp-page="/Login">
+    <form class="col-sm-10 col-md-8 col-lg-6" method="post" asp-page="/Login">
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
         <h1 class="mt-5 mb-3 font-weight-normal">Identifique-se, por favor</h1>
 
         <style type="text/css">
@@ -17,22 +20,25 @@
         </style>
         <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
 
-        <input asp-for="Dados.Email" class="form-control" placeholder="Digite aqui seu e-mail" required autofocus />
-        <span asp-validation-for="Dados.Email" class="text-danger"></span>
-
-        <input asp-for="Dados.Senha" class="form-control mt-3" placeholder="Digite aqui sua senha" required />
-        <span asp-validation-for="Dados.Senha" class="text-danger"></span>
-
-        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
-
-        <div class="checkbox mt-3">
-            <label asp-for="Dados.Lembrar">
-                <input asp-for="Dados.Lembrar" />
-                @Html.DisplayNameFor(m => m.Dados.Lembrar)
-            </label>
+        <div class="form-floating mb-3">
+            <input asp-for="Dados.Email" class="form-control" placeholder=" " required autofocus />
+            <label asp-for="Dados.Email">E-mail</label>
+            <span asp-validation-for="Dados.Email" class="text-danger"></span>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+        <div class="form-floating mb-3">
+            <input asp-for="Dados.Senha" class="form-control" placeholder=" " required />
+            <label asp-for="Dados.Senha">Senha</label>
+            <span asp-validation-for="Dados.Senha" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" asp-for="Dados.Lembrar" />
+            <label class="form-check-label" asp-for="Dados.Lembrar"></label>
+        </div>
+
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Entrar</button>
+
         <p class="mt-3">Ainda não é cadastrado? <a href="/NovoCliente">Clique aqui</a> para se cadastrar.</p>
         <p class="mt-3">Esqueceu sua senha? <a href="/RecuperarSenha">Clique aqui</a> para recuperá-la.</p>
     </form>

@@ -2,10 +2,11 @@
 @model QuitandaOnline.Pages.RecuperarSenhaModel
 @{
     ViewData["titulo"] = "Recuperação de Senha";
+    Layout = "_Layout";
 }
 
 <div class="row justify-content-center">
-    <form class="form-signin align-self-center" method="post" asp-page="/EsqueciSenha">
+    <form class="col-sm-10 col-md-8 col-lg-6" method="post" asp-page="/EsqueciSenha">
         <h1 class="mt-5 mb-3 font-weight-normal">Recuperação de Senha</h1>
 
         <style type="text/css">
@@ -18,10 +19,16 @@
 
         <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
 
-        <input asp-for="Dados.Email" class="form-control" placeholder="Digite aqui seu e-mail" required autofocus />
-        <span asp-validation-for="Dados.Email" class="text-danger"></span>
+        <div class="form-floating mb-3">
+            <input asp-for="Dados.Email" class="form-control" placeholder=" " required autofocus />
+            <label asp-for="Dados.Email">E-mail</label>
+            <span asp-validation-for="Dados.Email" class="text-danger"></span>
+        </div>
 
-        <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Recuperar</button>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Recuperar</button>
+
+        <p class="mt-3">Ainda não é cadastrado? <a href="/NovoCliente">Clique aqui</a> para se cadastrar.</p>
+
     </form>
 </div>
 
